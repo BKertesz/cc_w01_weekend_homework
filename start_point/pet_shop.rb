@@ -77,7 +77,7 @@ def sell_pet_to_customer(shop,new_pet,customer)
   return nil if new_pet == nil
   price = new_pet[:price]
   if customer_can_afford_pet(customer,new_pet)
-    shop[:admin][:pets_sold] += 1
+    increase_pets_sold(shop,1)
     add_pet_to_customer(customer,new_pet)
     remove_pet_by_name(shop,new_pet)
     add_or_remove_cash(customer,price)
