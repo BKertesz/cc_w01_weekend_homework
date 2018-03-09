@@ -38,9 +38,10 @@ def find_pet_by_name(pet_shop_data,name)
   pet = {}
   for i in pet_shop_data[:pets]
     if i[:name] == name
-      
+      pet[:name] = name
     end
   end
+  return nil if pet.empty?
   return pet
 end
 # End of file
