@@ -6,8 +6,13 @@ def total_cash(pet_shop_data)
   return pet_shop_data[:admin][:total_cash]
 end
 
-def add_or_remove_cash(pet_shop_data,amount)
-  return pet_shop_data[:admin][:total_cash] += amount
+def add_or_remove_cash(hash,amount)
+  # If it is a customer return their money amount
+  if hash.has_key?(:cash)
+    return hash[:cash] -= amount
+  end
+  # Else return shop money
+  return hash[:admin][:total_cash] += amount
 end
 
 def pets_sold(pet_shop_data)
@@ -70,12 +75,13 @@ end
 
 def sell_pet_to_customer(shop,new_pet,customer)
   return nil if new_pet == nil
+  price = new_pet[:price]
   if customer_can_afford_pet(customer,new_pet)
     shop[:admin][:pets_sold] += 1
-    customer[:pets].push(new_pet)
+    add_pet_to_customer(customer,new_pet)
     remove_pet_by_name(shop,new_pet)
-    customer[:cash] -= new_pet[:price]
-    shop[:admin][:total_cash] += new_pet[:price]
+    add_or_remove_cash(customer,price)
+    add_or_remove_cash(shop,price)
   end
   return false
 
