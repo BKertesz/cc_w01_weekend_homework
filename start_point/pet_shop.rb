@@ -69,6 +69,7 @@ def customer_can_afford_pet(customer,new_pet)
 end
 
 def sell_pet_to_customer(shop,new_pet,customer)
+  return nil if new_pet == nil
   if customer_can_afford_pet(customer,new_pet)
     shop[:admin][:pets_sold] += 1
     customer[:pets].push(new_pet)
@@ -76,6 +77,7 @@ def sell_pet_to_customer(shop,new_pet,customer)
     customer[:cash] -= new_pet[:price]
     shop[:admin][:total_cash] += new_pet[:price]
   end
+  return false
 
 end
 # End of file
