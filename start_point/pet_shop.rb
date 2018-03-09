@@ -53,5 +53,9 @@ def remove_pet_by_name(pet_shop_data,name)
   end
 end
 
+def add_pet_to_stock(pet_shop_data,new_pet)
+  return pet_shop_data[:pets].push(new_pet)
+end
+
 
 # End of file
