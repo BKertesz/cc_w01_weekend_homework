@@ -51,9 +51,10 @@ end
 
 def remove_pet_by_name(pet_shop_data,name)
   for i in pet_shop_data[:pets]
-    if i[:name] == name
-      pet_shop_data[:pets].delete(i)
-    end
+    # if i[:name] == name
+    #   pet_shop_data[:pets].delete(i)
+    # end
+    pet_shop_data[:pets].delete(i) if i[:name] == name
   end
 end
 
@@ -66,7 +67,9 @@ def customer_pet_count(customer)
 end
 
 def add_pet_to_customer(customer,new_pet)
-  return customer[:pets].push(new_pet)
+  price = new_pet[:price]
+  customer[:pets].push(new_pet)
+  add_or_remove_cash(customer,-price)
 end
 
 def customer_can_afford_pet(customer,new_pet)
@@ -76,13 +79,12 @@ end
 
 def sell_pet_to_customer(shop,new_pet,customer)
   return nil if new_pet == nil
-  price = new_pet[:price]
+
   if customer_can_afford_pet(customer,new_pet)
     increase_pets_sold(shop,1)
     add_pet_to_customer(customer,new_pet)
     remove_pet_by_name(shop,new_pet)
-    add_or_remove_cash(customer,price)
-    add_or_remove_cash(shop,price)
+    add_or_remove_cash(shop,new_pet[:price])
   end
   return false
 
