@@ -2,17 +2,21 @@ def pet_shop_name(pet_shop_data)
   return pet_shop_data[:name]
 end
 
-def total_cash(pet_shop_data)
-  return pet_shop_data[:admin][:total_cash]
+def total_cash(hash)
+  return hash[:cash] if hash.has_key?(:cash)
+  return hash[:admin][:total_cash]
 end
 
 def add_or_remove_cash(hash,amount)
   # If it is a customer return their money amount
-  if hash.has_key?(:cash)
-    return hash[:cash] -= amount
-  end
-  # Else return shop money
+  # if hash.has_key?(:cash)
+  #   return hash[:cash] += amount
+  # end
+  return hash[:cash]+= amount if hash.has_key?(:cash) 
+  # # Else return shop money
   return hash[:admin][:total_cash] += amount
+  # money = total_cash(hash)
+  # return money += amount
 end
 
 def pets_sold(pet_shop_data)
