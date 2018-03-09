@@ -35,14 +35,12 @@ def pets_by_breed(pet_shop_data,breed)
 end
 
 def find_pet_by_name(pet_shop_data,name)
-  pet = {}
   for i in pet_shop_data[:pets]
     if i[:name] == name
-      pet[:name] = name
+      return i
     end
   end
-  return nil if pet.empty?
-  return pet
+  return nil
 end
 
 def remove_pet_by_name(pet_shop_data,name)
