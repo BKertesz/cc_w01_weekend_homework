@@ -44,4 +44,14 @@ def find_pet_by_name(pet_shop_data,name)
   return nil if pet.empty?
   return pet
 end
+
+def remove_pet_by_name(pet_shop_data,name)
+  for i in pet_shop_data[:pets]
+    if i[:name] == name
+      pet_shop_data[:pets].delete(i)
+    end
+  end
+end
+
+
 # End of file
